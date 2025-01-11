@@ -1,0 +1,15 @@
+<div class="user-info">
+  <img [src]="user.profilePicture" alt="Profile Picture" class="profile-img" />
+  <h2>{{ user.fullName }}</h2>
+  <p><strong>Email:</strong> {{ user.email }}</p>
+  <p><strong>NIM:</strong> {{ user.nim }}</p>
+</div>
+
+<div class="location-info">
+  <h3>Current Location</h3>
+  <p><strong>Latitude:</strong> {{ location.latitude }}</p>
+  <p><strong>Longitude:</strong> {{ location.longitude }}</p>
+  <p><strong>Address:</strong> {{ location.address }}</p>
+</div>
+
+<div id="map" class="map-container"></div>
