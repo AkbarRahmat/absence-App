@@ -31,7 +31,8 @@
                 "output": "assets"
               }
             ],
-            "styles": ["src/global.scss", "src/theme/variables.scss"],
+            "styles": ["src/global.scss", "src/theme/variables.scss","node_modules/leaflet/dist/leaflet.css"
+          ],
             "scripts": []
           },
           "configurations": {
@@ -80,7 +81,6 @@
               "buildTarget": "app:build:development"
             },
             "ci": {
-              "progress": false
             }
           },
           "defaultConfiguration": "development"
@@ -126,7 +126,10 @@
     }
   },
   "cli": {
-    "schematicCollections": ["@ionic/angular-toolkit"]
+    "schematicCollections": [
+      "@ionic/angular-toolkit"
+    ],
+    "analytics": "0a2a75a4-f69a-4f4e-9c37-b45ff8d38c11"
   },
   "schematics": {
     "@ionic/angular-toolkit:component": {

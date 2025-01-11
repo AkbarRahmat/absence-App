@@ -1,1 +1,41 @@
+.tabs-card {
+  border-radius: 15px;
+  position: fixed;
+  bottom: calc(env(safe-area-inset-bottom) + 1.7em); /* Sesuaikan posisi di atas tombol QR */
+  left: 10px;
+  right: 10px;
+  z-index: 10;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); /* Tambahkan bayangan untuk estetika */
+  padding-bottom: 0;
+  margin-bottom: 10px;
+}
 
+ion-card-content {
+  padding: 0px;
+}
+
+
+ion-tab-bar {
+  position: relative;
+  --background: transparent;
+  padding-bottom: 10px; /* Ruang untuk FAB */
+}
+ion-fab {
+  bottom: calc(env(safe-area-inset-bottom) + 4.4em);
+}
+
+.fab-container {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.fab-center ion-fab-button {
+  --background: #4285f4; /* Warna FAB */
+  --color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 60px;
+  height: 60px;
+}

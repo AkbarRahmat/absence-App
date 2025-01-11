@@ -1,0 +1,26 @@
+ion-content {
+  --padding-top: 16px;
+}
+
+.generate-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 16px;
+}
+
+.qr-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+  height: calc(100vh - 200px); /* Adjust based on header and button height */
+}
+
+.qr-image {
+  max-width: 90%; /* Restrict width to avoid overflow */
+  max-height: 90%; /* Restrict height */
+  border: 2px solid #000; /* Optional border for styling */
+  border-radius: 8px;
+  object-fit: contain; /* Ensure proper image scaling */
+}
