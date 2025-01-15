@@ -8,16 +8,16 @@ import {
 } from '@ionic/angular/standalone';
 
 @Component({
-  selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss'],
+    selector: 'app-tab2',
+    templateUrl: 'tab2.page.html',
+    styleUrls: ['tab2.page.scss'],
   standalone: true,
-  imports: [
-    CommonModule,
-    IonList,
-    IonItem,
-    IonAvatar,
-    IonLabel,
+    imports: [
+        CommonModule,
+        IonList,
+        IonItem,
+        IonAvatar,
+        IonLabel,
   ],
 })
 export class Tab2Page {}

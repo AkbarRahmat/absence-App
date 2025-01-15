@@ -1,13 +1,23 @@
-<ion-content>
+<ion-content style="padding-bottom: 60px;">
   <ion-list>
-    <ion-item *ngFor="let kelas of items; let index = index">
-      <ion-avatar slot="start">
-        <img [src]="'https://picsum.photos/80/80?random=' + index" alt="avatar" />
-      </ion-avatar>
-      <ion-label>{{ kelas }}</ion-label>
-    </ion-item>
+    <ng-container *ngFor="let course of classes; let i = index">
+      <!-- Card untuk Kelas -->
+      <ion-item (click)="toggleExpand(i)" class="class-card">
+        <ion-avatar slot="start">
+          <img [src]="'https://picsum.photos/80/80?random=' + course.name" alt="avatar" />
+        </ion-avatar>
+        <ion-label>{{ course.name }}</ion-label>
+      </ion-item>
+
+      <!-- List Pertemuan -->
+      <ion-list *ngIf="course.expanded">
+        <ion-item *ngFor="let period of course.periods" class="period-item" (click)="handlePeriodClick(period)">
+          <ion-label>{{ period.name }}</ion-label>
+          <ion-label slot="end" [ngClass]="getStatusClass(period.status)">
+            {{ period.status }}
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ng-container>
   </ion-list>
-  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
-    <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
 </ion-content>

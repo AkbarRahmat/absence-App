@@ -5,11 +5,11 @@ import { addIcons } from 'ionicons';
 import { triangle, ellipse, square, heart, diamond, home, chatbubbles, code, qrCode, document, person } from 'ionicons/icons';
 
 @Component({
-  selector: 'app-tabs',
-  templateUrl: 'tabs.page.html',
-  styleUrls: ['tabs.page.scss'],
-  standalone: true,
-  imports: [IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel, IonFab, IonFabButton, IonCard, IonCardContent, IonRouterOutlet],
+    selector: 'app-tabs',
+    templateUrl: 'tabs.page.html',
+    styleUrls: ['tabs.page.scss'],
+    standalone: true,
+    imports: [IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel, IonFab, IonFabButton, IonCard, IonCardContent, IonRouterOutlet],
 })
 export class TabsPage {
   public environmentInjector = inject(EnvironmentInjector);
