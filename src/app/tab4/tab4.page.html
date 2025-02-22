@@ -1,23 +1,18 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Riwayat Presensi</ion-title>
+    <ion-title>History</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let record of history">
-      <ion-icon slot="start" name="checkmark-circle" color="success" *ngIf="record.status === 'Hadir'"></ion-icon>
-      <ion-icon slot="start" name="close-circle" color="danger" *ngIf="record.status === 'Tidak Hadir'"></ion-icon>
-      <ion-icon slot="start" name="information-circle" color="warning" *ngIf="record.status === 'Izin'"></ion-icon>
+    <ion-item *ngFor="let entry of history">
       <ion-label>
-        <h2>Tanggal: {{ record.date }}</h2>
-        <p>Waktu: {{ record.time }}</p>
-        <p>Status: {{ record.status }}</p>
-        <p>Mata Kuliah: {{ record.course }}</p>
-        <p>Dosen: {{ record.lecturer }}</p>
+        <h2>{{ entry.date }} - {{ entry.time }}</h2>
+        <p><strong>{{ entry.course }}</strong></p>
+        <p>Status: {{ entry.status }}</p>
+        <p *ngIf="entry.lecturer !== '-'">Dosen: {{ entry.lecturer }}</p>
       </ion-label>
     </ion-item>
-    
   </ion-list>
 </ion-content>

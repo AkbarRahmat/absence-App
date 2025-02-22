@@ -1,22 +1,18 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Scan QR</ion-title>
+    <ion-title>Generate QR Code</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="generate-button">
-    <ion-button expand="block" (click)="generateQRCode()">
-      Generate QR Code
-    </ion-button>
+<ion-content class="ion-padding">
+  <ion-button expand="full" (click)="generateQRCode()">Generate QR Code</ion-button>
+
+  <div *ngIf="qrCodeImage">
+    <h3>QR Code:</h3>
+    <img [src]="qrCodeImage" alt="QR Code">
   </div>
 
-  <div class="qr-container">
-    <img
-      *ngIf="qrCodeImage"
-      [src]="qrCodeImage"
-      alt="QR Code"
-      class="qr-image"
-    />
+  <div *ngIf="!qrCodeImage">
+    <p>Tekan tombol untuk membuat QR Code.</p>
   </div>
 </ion-content>

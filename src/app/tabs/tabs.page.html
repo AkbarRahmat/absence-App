@@ -1,12 +1,11 @@
+
 <ion-tabs>
-  <!-- Floating QR Button -->
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
     <ion-fab-button color="primary" (click)="navigateToTab3()">
       <ion-icon name="qr-code"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
-  <!-- Tab Bar Wrapped in Card -->
   <ion-card class="tabs-card">
     <ion-card-content>
       <ion-tab-bar slot="bottom">
@@ -16,15 +15,16 @@
         </ion-tab-button>
 
         <ion-tab-button tab="tab2">
-          <ion-icon name="chatbubbles"></ion-icon>
-          <ion-label>Chat</ion-label>
+          <ion-icon name="notifications"></ion-icon>
+          <ion-label>Notifikasi</ion-label>
+          <ion-badge *ngIf="notificationCount > 0" color="danger">{{ notificationCount }}</ion-badge>
         </ion-tab-button>
 
         <ion-tab-button>
           <ion-icon ></ion-icon>
           <ion-label></ion-label>
         </ion-tab-button>
-
+        
         <ion-tab-button tab="tab4">
           <ion-icon name="document"></ion-icon>
           <ion-label>History</ion-label>

@@ -12,3 +12,68 @@ ion-item {
     font-size: 1.2rem; /* Memperbesar teks label */
   }
   
+  ion-header {
+    --background: #007bff; // Warna header biru
+    color: white;
+  
+    ion-toolbar {
+      --background: transparent;
+      --color: white;
+      text-align: center;
+    }
+  }
+  
+  ion-content {
+    background-color: #f4f4f4; // Warna latar belakang
+    padding: 16px;
+  }
+  
+  // Styling untuk Card Notifikasi
+  ion-card {
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  
+    &:hover {
+      transform: scale(1.02);
+      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    }
+  
+    ion-card-header {
+      background: #007bff;
+      color: white;
+      border-radius: 10px 10px 0 0;
+      padding: 12px;
+    }
+  
+    ion-card-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+  
+    ion-card-content {
+      background: white;
+      padding: 12px;
+      font-size: 0.9rem;
+      color: #333;
+  
+      strong {
+        color: #007bff;
+      }
+    }
+  }
+  
+  // Styling untuk Tidak Ada Notifikasi
+  .no-notif {
+    text-align: center;
+    font-size: 1rem;
+    color: gray;
+    margin-top: 20px;
+  }
+  
+  // Styling untuk Spinner Loading
+  ion-spinner {
+    display: block;
+    margin: 20px auto;
+  }
+  

@@ -1,23 +1,59 @@
-<ion-content style="padding-bottom: 60px;">
-  <ion-list>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Dashboard Kelas
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Loading indicator -->
+  <div *ngIf="isLoading" class="loading-container">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Loading data...</p>
+  </div>
+
+  <!-- Error message -->
+  <div *ngIf="errorMessage" class="error-container">
+    <ion-text color="danger">
+      <p>{{ errorMessage }}</p>
+    </ion-text>
+  </div>
+
+  <!-- Empty state -->
+  <div *ngIf="!isLoading && !errorMessage && classes.length === 0" class="empty-container">
+    <ion-text>
+      <p>No classes found</p>
+    </ion-text>
+  </div>
+
+  <!-- Class list -->
+  <ion-list *ngIf="classes.length > 0">
     <ng-container *ngFor="let course of classes; let i = index">
       <!-- Card untuk Kelas -->
       <ion-item (click)="toggleExpand(i)" class="class-card">
         <ion-avatar slot="start">
-          <img [src]="'https://picsum.photos/80/80?random=' + course.name" alt="avatar" />
+          <img [src]="'https://picsum.photos/80/80?random=' + i" alt="avatar" />
         </ion-avatar>
-        <ion-label>{{ course.name }}</ion-label>
+        <ion-label>
+          <h2>{{ course.name }}</h2>
+          <p>{{ course.details.hari }} {{ course.details.jam_mulai }} - {{ course.details.jam_selesai }}</p>
+        </ion-label>
+        <ion-icon name="chevron-down-outline" *ngIf="!course.expanded"></ion-icon>
+        <ion-icon name="chevron-up-outline" *ngIf="course.expanded"></ion-icon>
       </ion-item>
 
       <!-- List Pertemuan -->
-      <ion-list *ngIf="course.expanded">
-        <ion-item *ngFor="let period of course.periods" class="period-item" (click)="handlePeriodClick(period)">
+      <div *ngIf="course.expanded" class="periods-list">
+        <ion-item *ngFor="let period of course.periods" 
+                  class="period-item" 
+                  (click)="handlePeriodClick(period, course)">
           <ion-label>{{ period.name }}</ion-label>
           <ion-label slot="end" [ngClass]="getStatusClass(period.status)">
             {{ period.status }}
           </ion-label>
         </ion-item>
-      </ion-list>
+      </div>
     </ng-container>
   </ion-list>
 </ion-content>

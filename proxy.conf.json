@@ -1,0 +1,8 @@
+{
+  "/aapi": {
+    "target": "https://pembelajaran.ubpkarawang.ac.id",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"  
+  }
+}

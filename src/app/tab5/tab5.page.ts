@@ -1,37 +1,48 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import { Geolocation } from '@capacitor/geolocation';
-import * as L from 'leaflet';
+import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular'; // ✅ Tambahkan IonicModule
+import { DataService } from '../services/data.service';
+import * as L from 'leaflet'; // Library peta Leaflet
 
 @Component({
   selector: 'app-tab5',
   templateUrl: './tab5.page.html',
   styleUrls: ['./tab5.page.scss'],
   standalone: true,
+  imports: [CommonModule, IonicModule],
 })
 export class Tab5Page implements OnInit, OnDestroy {
-  user = {
-    fullName: 'John Doe',
-    nim: '1234567890',
-    email: 'johndoe@example.com',
-    profilePicture: 'https://ionicframework.com/docs/img/demos/avatar.svg',
-  };
+  @ViewChild('mapContainer', { static: false }) mapContainer!: ElementRef;
 
-  location = {
-    latitude: null as number | null,
-    longitude: null as number | null,
-    address: 'Fetching location...',
-  };
+  user: any = {}; // Menyimpan data user
+  location: any = { latitude: null, longitude: null, address: 'Fetching location...' };
 
-  private map: L.Map | undefined;
-  private marker: L.Marker | undefined;
+  private map: any;
+  private marker: any;
   private watchId: string | null = null;
 
-  constructor() {}
+  constructor(private dataService: DataService) {}
 
   async ngOnInit() {
+    // Ambil data user dan lokasi dari DataService
+    this.dataService.getUserData().subscribe(user => {
+      if (user) {
+        this.user = user;
+        console.log('User data diterima di Tab5:', this.user);
+      }
+    });
+
+    this.dataService.getLocationData().subscribe(location => {
+      if (location) {
+        this.location = location;
+        console.log('Location data diterima di Tab5:', this.location);
+      }
+    });
+
     try {
-      await this.initializeMap();
-      this.trackLocation();
+      await this.initializeMap(); 
+      this.trackLocation(); 
     } catch (error) {
       console.error('Error initializing map:', error);
     }
@@ -39,7 +50,7 @@ export class Tab5Page implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     if (this.watchId !== null) {
-      Geolocation.clearWatch({ id: this.watchId }); // Stop watching location updates
+      Geolocation.clearWatch({ id: this.watchId });
     }
   }
 
@@ -51,20 +62,30 @@ export class Tab5Page implements OnInit, OnDestroy {
       this.location.latitude = latitude;
       this.location.longitude = longitude;
 
-      // Initialize map with user's current location
-      this.map = L.map('map', { zoomControl: false }).setView([latitude, longitude], 15);
+      this.location.address = `Lat: ${latitude.toFixed(6)}, Lng: ${longitude.toFixed(6)}`;
+      this.dataService.setLocationData(this.location);
 
-      // Add OpenStreetMap tiles
+      console.log('Location data dikirim ke DataService:', this.location);
+
+      // **Inisialisasi Peta**
+      this.map = L.map(this.mapContainer.nativeElement).setView([latitude, longitude], 15);
+
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors',
+        attribution: '© OpenStreetMap contributors'
       }).addTo(this.map);
 
-      // Add marker for current position
       this.marker = L.marker([latitude, longitude], {
-        draggable: true, // Make marker draggable if needed
-      }).addTo(this.map).bindPopup('You are here!').openPopup();
+        icon: L.icon({
+          iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
+          shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
+          iconSize: [25, 41],
+          iconAnchor: [12, 41],
+          popupAnchor: [1, -34],
+          shadowSize: [41, 41],
+        }),
+      }).addTo(this.map).bindPopup('Lokasi anda').openPopup();
     } catch (error) {
-      console.error('Error initializing map:', error);
+      console.error('Gagal mendapatkan lokasi:', error);
     }
   }
 
@@ -79,25 +100,24 @@ export class Tab5Page implements OnInit, OnDestroy {
       if (position) {
         const { latitude, longitude } = position.coords;
 
-        // Update location data
         this.location.latitude = latitude;
         this.location.longitude = longitude;
 
-        // Update marker position
-        if (this.marker) {
-          this.marker.setLatLng([latitude, longitude]); // Update marker with new position
-        }
-
-        // Center map on new position
-        if (this.map) {
-          this.map.setView([latitude, longitude], 15); // Update map center
-        }
-
-        // Update address (simulate reverse geocoding)
         this.location.address = `Lat: ${latitude.toFixed(6)}, Lng: ${longitude.toFixed(6)}`;
+        this.dataService.setLocationData(this.location);
+
+        if (this.marker) {
+          this.marker.setLatLng([latitude, longitude]);
+        }
+
+        if (this.map) {
+          this.map.setView([latitude, longitude], 15);
+        }
       }
-    }).then((watchId) => {
-      this.watchId = watchId;
+    }).then(id => {
+      this.watchId = id; 
+    }).catch(error => {
+      console.error('Gagal watch posisi:', error);
     });
   }
 }

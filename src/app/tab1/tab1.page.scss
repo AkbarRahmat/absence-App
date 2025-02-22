@@ -19,6 +19,9 @@ ion-item {
   font-size: 1.2rem;
   cursor: pointer;
   transition: background-color 0.3s;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 ion-avatar {
@@ -88,4 +91,60 @@ text-transform: capitalize;
 }
 ion-content {
 --overflow: auto;
+}
+/* tab1.page.scss */
+.loading-container,
+.error-container,
+.empty-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+  height: 100%;
+  
+  p {
+    margin-top: 10px;
+    color: var(--ion-color-medium);
+  }
+}
+
+.class-card {
+  margin: 8px 0;
+  --background: var(--ion-color-light);
+  border-radius: 8px;
+  
+  ion-avatar {
+    width: 48px;
+    height: 48px;
+  }
+
+  ion-label {
+    h2 {
+      font-weight: 600;
+      color: var(--ion-color-dark);
+      margin-bottom: 4px;
+    }
+    p {
+      color: var(--ion-color-medium);
+      font-size: 14px;
+    }
+  }
+}
+
+.periods-list {
+  background: var(--ion-color-light);
+  margin: 0 8px;
+  border-radius: 0 0 8px 8px;
+  
+  .period-item {
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --min-height: 48px;
+    
+    &:last-child {
+      --border-width: 0;
+    }
+  }
 }

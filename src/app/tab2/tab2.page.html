@@ -1,26 +1,29 @@
-<ion-list>
-  <ion-item>
-    <ion-avatar aria-hidden="true" slot="start">
-      <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-    </ion-avatar>
-    <ion-label>Huey</ion-label>
-  </ion-item>
-  <ion-item>
-    <ion-avatar aria-hidden="true" slot="start">
-      <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-    </ion-avatar>
-    <ion-label>Dewey</ion-label>
-  </ion-item>
-  <ion-item>
-    <ion-avatar aria-hidden="true" slot="start">
-      <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-    </ion-avatar>
-    <ion-label>Louie</ion-label>
-  </ion-item>
-  <ion-item>
-    <ion-avatar aria-hidden="true" slot="start">
-      <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-    </ion-avatar>
-    <ion-label>Fooie</ion-label>
-  </ion-item>
-</ion-list>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Notifikasi</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="fetchNotifications()">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list *ngIf="notifications.length > 0">
+    <ion-card *ngFor="let notif of notifications">
+      <ion-card-header>
+        <ion-card-title>{{ notif.kode_mk }} - {{ notif.kelas }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        📅 Hari: <strong>{{ notif.hari }}</strong> <br />
+        ⏰ Jam: <strong>{{ notif.jam_mulai }} - {{ notif.jam_selesai }}</strong>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+  <ion-text *ngIf="notifications.length === 0 && !isLoading">
+    <p class="no-notif">Tidak ada pemberitahuan absensi saat ini.</p>
+  </ion-text>
+
+  <ion-spinner *ngIf="isLoading"></ion-spinner>
+</ion-content>
